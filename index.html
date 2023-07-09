@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Calculator</title>
+    <style>
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+        }
+
+        h1 {
+            color: #333;
+            padding: 20px 0;
+        }
+
+        .material-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .material {
+            position: relative;
+            margin: 10px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            padding: 10px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+
+        .material:hover {
+            background-color: #e6e6e6;
+        }
+
+        img {
+            width: 100px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .material:hover img {
+            transform: scale(1.1);
+        }
+
+        span {
+            display: block;
+            color: #333;
+            font-weight: bold;
+        }
+
+        #rezultat {
+            margin-top: 20px;
+            color: #333;
+            font-weight: bold;
+            font-size: 20px;
+        }
+    </style>
+    <script>
+        function izracunajCenuOrmana(materijal) {
+            const povrsina = parseFloat(document.getElementById("povrsina").value);
+
+            if (isNaN(povrsina)) {
+                document.getElementById("rezultat").textContent = "Niste uneli broj kvadrata.";
+                return;
+            }
+
+            // Cene materijala
+            const ceneMaterijala = {
+                Serenissima: 100,   // Cena materijala 1
+                Milago: 200,   // Cena materijala 2
+                Apollo: 300    // Cena materijala 3
+            };
+
+            // Izračunavanje cene ormara za odabrani materijal
+            const cena = (povrsina * ceneMaterijala[materijal]).toFixed(2);
+
+            // Prikazivanje rezultata na stranici
+            document.getElementById("rezultat").textContent = `Cena ormara (${materijal}): $${cena}`;
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Calculator</h1>
+
+    <label for="povrsina">Površina ormara (m²):</label>
+    <input type="number" id="povrsina">
+
+    <div class="material-container">
+        <div class="material" onclick="izracunajCenuOrmana('Serenissima')">
+            <img src="serenissima.jpg" alt="Materijal 1">
+            <span>Serenissima - cena po m²: 100$</span>
+        </div>
+
+        <div class="material" onclick="izracunajCenuOrmana('Milago')">
+            <img src="Milago.jpg" alt="Materijal 2">
+            <span>Milago - cena po m²: 200$</span>
+        </div>
+
+        <div class="material" onclick="izracunajCenuOrmana('Apollo')">
+            <img src="apollo.jpg" alt="Materijal 3">
+            <span>Apollo - cena po m²: 300$</span>
+        </div>
+    </div>
+
+    <div id="rezultat"></div>
+</body>
+
+</html>
